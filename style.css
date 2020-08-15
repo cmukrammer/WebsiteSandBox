@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lora', sans-serif;
+}
+
+.my-nav-color {
+    background-color: #fff!important;
+}
+
+.navbar-brand, .nav-link, .navbar-toggler {
+    color: #051009!important;
+}
+
+.nav-link:hover {
+    background-color: #f8f9fa;
+}
+
+body {
+    color: #051009;
+    position: relative;
+}
+
+.container {
+    /* outline: 1px red solid; */
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+    /* outline: 1px red solid; */
+}
+
+.jumbo {
+    /* display: flex; */
+    position: relative;
+    overflow: hidden;
+}
+
+.lobster-font {
+    font-family: 'Lobster', sans-serif;
+}
+
+.jumbo::before {
+    content: '';
+    background: #EFFAF3;
+    width: 150%;
+    height: 100%;
+    position: absolute;
+    top: -45%;
+    left: -30%;
+    transform: skewY(-20deg);
+    z-index: -1;
+    /* outline: 1px red solid; */
+}
+
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-0.5rem);
+}
+
+.card-date {
+    filter: contrast(40%);
+}
+
+.sidebar {
+    cursor: pointer;
+}
+
+.article-date {
+    filter: contrast(40%);
+}
+
+.footer {
+    background-color: #184E2B;
+    color: white;
+}
+
+.footer-brand {
+    color: white;
+}
+
+.footer-follow p {
+    margin-bottom: 0px;
+}
+
+
+@media (min-width: 1024px) {
+    h1 {
+        font-size: 4em;
+    }
+}
