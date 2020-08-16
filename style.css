@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Lora', sans-serif;
+    font-family: 'Noto Sans TC', 'Lora', sans-serif;
 }
 
 .my-nav-color {
@@ -47,7 +47,7 @@ body {
 }
 
 .lobster-font {
-    font-family: 'Lobster', sans-serif;
+    font-family: 'Lora', sans-serif;
 }
 
 .jumbo-social {
