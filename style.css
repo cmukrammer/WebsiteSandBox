@@ -41,8 +41,17 @@ body {
     overflow: hidden;
 }
 
+.jumbo p {
+    color: #05100970;
+    line-height: 2em;
+}
+
 .lobster-font {
     font-family: 'Lobster', sans-serif;
+}
+
+.jumbo-social {
+    font-size: 1em;
 }
 
 .jumbo::before {
@@ -76,6 +85,14 @@ body {
 
 .article-date {
     filter: contrast(40%);
+}
+
+.article-title h2 {
+    font-weight: bold;
+}
+
+.article-body {
+    line-height: 1.8em;
 }
 
 .footer {
