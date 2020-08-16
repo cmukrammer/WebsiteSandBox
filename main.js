@@ -1,10 +1,10 @@
-console.log('Ya');
-function opCallback(opName) {
-    return () => {
-        console.log(opName);
-    };
-};
-
-for (const social of ["youtube", "facebook"]) {
-    document.querySelector(`.${social}`).onclick = opCallback(social);
-}
+// element argument can be a selector string
+//   for an individual element
+var msnry = new Masonry( '.grid', {
+    itemSelector: '.grid-item',
+    // use element for option
+    columnWidth: '.grid-sizer',
+    gutter: 10,
+    percentPosition: true,
+    resize: true
+});
