@@ -8,3 +8,7 @@ var msnry = new Masonry( '.grid', {
     percentPosition: true,
     resize: true
 });
+
+imagesLoaded(msnry, function() {
+    msnry.layout();
+})
