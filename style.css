@@ -43,7 +43,7 @@ body {
 
 .jumbo p {
     color: #05100970;
-    line-height: 2em;
+    /* line-height: 2em; */
 }
 
 .lobster-font {
@@ -68,11 +68,12 @@ body {
 }
 
 .card {
-    transition: transform 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-0.5rem);
+    box-shadow: 0 0.5rem 1rem gray;
 }
 
 .card-date {
@@ -81,18 +82,6 @@ body {
 
 .sidebar {
     cursor: pointer;
-}
-
-.article-date {
-    filter: contrast(40%);
-}
-
-.article-title h2 {
-    font-weight: bold;
-}
-
-.article-body {
-    line-height: 1.8em;
 }
 
 .footer {
@@ -109,8 +98,17 @@ body {
 }
 
 
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
 @media (min-width: 1024px) {
     h1 {
         font-size: 4em;
+    }
+    .jumbo p {
+        line-height: 2em;
     }
 }
