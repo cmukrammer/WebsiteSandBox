@@ -148,7 +148,7 @@ body {
 
 .main-about {
     display: grid;
-    place-items: center;
+    /* place-items: center; */
     align-content: center;
 }
 
