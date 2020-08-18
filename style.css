@@ -9,6 +9,12 @@
     font-family: 'Noto Sans TC', 'Lora', sans-serif;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .my-nav-color {
     background-color: #fff!important;
 }
@@ -30,6 +36,10 @@
     height: 40px;
     text-align: center;
     border-radius: 25%;
+}
+
+footer {
+    margin-top: auto;
 }
 
 .footer-brand.logo {
@@ -62,7 +72,7 @@ body {
 .jumbo {
     /* display: flex; */
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .jumbo p {
@@ -81,11 +91,11 @@ body {
 .jumbo::before {
     content: '';
     background: #EFFAF3;
-    width: 150%;
-    height: 100%;
+    width: 100%;
+    height: 120%;
     position: absolute;
-    top: -45%;
-    left: -30%;
+    top: -65%;
+    left: 0;
     transform: skewY(-20deg);
     z-index: -1;
     /* outline: 1px red solid; */
@@ -102,6 +112,10 @@ body {
 
 .card-date {
     filter: contrast(40%);
+}
+
+.card-title {
+    font-weight: bold;
 }
 
 .sidebar {
@@ -130,6 +144,17 @@ body {
 
 .footer-follow p {
     margin-bottom: 0px;
+}
+
+.main-about {
+    display: grid;
+    place-items: center;
+    align-content: center;
+}
+
+.working-experience {
+    font-size: smaller;
+    color: dimgrey;
 }
 
 
