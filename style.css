@@ -157,6 +157,11 @@ body {
     color: dimgrey;
 }
 
+.contact-img {
+    border-radius: 50%;
+    max-height: 30vh;
+}
+
 
 @media (min-width: 576px) {
     /* .card-columns {
