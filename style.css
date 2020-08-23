@@ -15,6 +15,10 @@ body {
     min-height: 100vh;
 }
 
+.fw-400 {
+    font-weight: 400;
+}
+
 .my-nav-color {
     background-color: #fff!important;
 }
@@ -56,7 +60,7 @@ footer {
 }
 
 body {
-    color: #051009;
+    color: rgba(41, 41, 41, 1);
     position: relative;
 }
 
@@ -122,6 +126,10 @@ body {
     cursor: pointer;
 }
 
+.text-lighter {
+    color: dimgrey;
+}
+
 .grid-sizer,
 .grid-item
 { 
@@ -160,6 +168,35 @@ body {
 .contact-img {
     border-radius: 50%;
     max-height: 30vh;
+}
+
+.article-text-color {
+    color: rgba(41, 41, 41, 1);
+}
+
+.article p {
+    line-height: 1.8em;
+    margin-top: 1.8em;
+}
+
+.article-image {
+    margin-top: 3em;
+}
+
+.author-info {
+    margin-top:1.8em;
+    color: gray;
+}
+
+.author-social {
+    margin-top: 1.8em;
+}
+
+.author-img {
+    width: 50px;
+    padding: 1px;
+    border-radius: 50%;
+    border: 1px #18a2b8 solid;
 }
 
 

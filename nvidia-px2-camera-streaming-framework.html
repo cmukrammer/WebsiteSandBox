@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/a9fd570b37.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+
+    <nav class="my-nav-color navbar sticky-top navbar-expand-lg navbar-light bg-light py-3">
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+        <a class="navbar-brand text-uppercase logo" href="index.html">K</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- main -->
+    <main class="container">
+        <hr>
+        <div class="row">
+            <div class="col-lg-2 col-12">
+
+            </div>
+            <div class="article-text-color col-12 col-lg-8 article">
+                <h2 class="fw-400 mt-3 mb-3">NVIDIA PX2 camera streaming framework</h1>
+                    <div class="row">
+                        <div class="col-sm-6 order-sm-2 author-social">
+                            <div class="jumbo-social float-sm-right">
+                                <a href="#"><i class="fab mx-1 fa-lg fa-facebook text-info"></i></a>
+                                <a href="#"><i class="fab mx-1 fa-lg fa-instagram text-info"></i></a>
+                                <a href="#"><i class="fab mx-1 fa-lg fa-twitter-square text-info"></i></a>
+                                <a href="#"><i class="fab mx-1 fa-lg fa-youtube text-info"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 author-info">
+                            <a href="about.html"><img class="author-img mr-2" src="imgs/panda.jpg" alt=""></a>
+                            <span>Aug 22 2020</span>
+                        </div>
+                    </div>
+                    <img class="mw-100 article-image" src="imgs/px2-1.png" alt="">
+                    <p>The MOD stands for Motion Object Detection. The 3D view is an application which uses images from
+                        4 cameras to stitch the surround view of around a car. The DNN is the deep neuron network
+                        algorithm, in which we do some pedestrian recognition or road sign recognition.</p>
+                    <p>In this project, the three algorithms are existing applications, and Nvidia also provides some
+                        sample code to demo how to capture camera streaming on their platform. Therefore, my job is to
+                        design a framework which is able to capture the camera streaming and transfer those image data
+                        to other applications efficiently.</p>
+                    <p>Here are two questions:</p>
+                    <p><strong>1. Why don’t we just combine the capture application and other applications together, and
+                            the share the same buffer pointer?</strong></p>
+                    <p><em>Ans: This is because we want to modulize every component in our system and thus increase the
+                            maintainability and extensibility.</em></p>
+                    <p><strong>2. How do we define efficiency?</strong></p>
+                    <p><em>Ans: Typically, we want to reduce the end-to-end latency to no more than 100 ms in the
+                            autonomous vehicle field. This will also be a goal and measurement in our later
+                            discussion.</em></p>
+                    <p>My first approach was to use socket to transfer the images. Each application stuck in the recv
+                        socket api to keep polling from that socket. The capturing application is responsible to send
+                        the same image buffer to different servers as a client. Just like below diagram.</p>
+                    <img class="mw-100 article-image" src="imgs/px2-2.png" alt="">
+                    <p>The good thing about this approach is that socket programming is a general framework, which gives
+                        us more portability if we want to migrate to other platforms in the future. We also have enough
+                        knowledge to fast prototyping it. However, the downside of this approach is performance. In this
+                        approach, there are too many memory copies and thus our performance is really bad.</p>
+                    <p>To tackle this issue, I did more study and turned into another image sharing framework called
+                        EGL. In this framework, we are able to share the same image buffer pointer by just exchanging
+                        the buffer pointer. This largely increases performance. Furthermore, I looked into the NVIDIA
+                        image pipeline solution, which could be used to convert the color format with HW based solution.
+                        This also enhanced our performance. With these two improvements, I managed to reduce the
+                        end-to-end latency from 100ms to 10ms. Below is the overall system architecture diagram.</p>
+                    <img class="mw-100 article-image" src="imgs/px2-3.png" alt="">
+                    <p>In this diagram, I used NVDIA 2D Engine (orange boxes) to do the resizing/color conversion so
+                        that I can reduce more CPU time and end-to-end latency. Plus, I leveraged NVDIA sample codes to
+                        create an image sharing pipeline by using EGL. EGL producers and consumers can transmit image
+                        buffers across different processes without memory copy. The only time we need to do a memory
+                        copy is when the algorithm we use would modify the image buffer. With this architecture, I
+                        reduced the end-to-end latency from 100ms to 10ms.</p>
+            </div>
+            <div class="sidebar col-12 col-lg-2 text-center mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <p><strong>Category: </strong><span class="text-lighter">CMU</span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p><strong>Tags: </strong><span class="text-lighter">NVIDIA, PX2, Camera streaming,
+                                Framework</span></p>
+                    </div>
+                </div>
+                <div class="ads mt-5">
+                    <h5>廣告</h5>
+                    <img src="//unsplash.it/200/100" alt="" class="img-fluid">
+                    <p>This is an ad</p>
+                    <img src="//unsplash.it/200/100" alt="" class="img-fluid">
+                    <p>This is another ad</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container-fluid footer text-center mt-5">
+            <div class="row">
+                <div class="col text-left">
+                    <a class="footer-brand text-uppercase logo" href="#">K</a>
+                </div>
+                <div class="col footer-follow">
+                    <div class="float-right">
+                        <p>Follow</p>
+                        <i class="fab mx-1 fa-facebook"></i>
+                        <i class="fab mx-1 fa-instagram"></i>
+                        <i class="fab mx-1 fa-twitter-square"></i>
+                        <i class="fab mx-1 fa-youtube"></i>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <p>Copyright by Krammer</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
