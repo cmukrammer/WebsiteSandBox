@@ -42,8 +42,10 @@ body {
     border-radius: 25%;
 }
 
-footer {
-    margin-top: auto;
+.footer {
+    background-color: #184E2B;
+    color: white;
+    margin-top: 5em;
 }
 
 .footer-brand.logo {
@@ -57,6 +59,14 @@ footer {
 
 .footer-brand.logo:hover {
     text-decoration: none!important;
+}
+
+.footer-brand {
+    color: white;
+}
+
+.footer-follow p {
+    margin-bottom: 0px;
 }
 
 body {
@@ -122,10 +132,6 @@ body {
     font-weight: bold;
 }
 
-.sidebar {
-    cursor: pointer;
-}
-
 .text-lighter {
     color: dimgrey;
 }
@@ -141,23 +147,11 @@ body {
     margin-bottom: 10px;
 }
 
-.footer {
-    background-color: #184E2B;
-    color: white;
-}
-
-.footer-brand {
-    color: white;
-}
-
-.footer-follow p {
-    margin-bottom: 0px;
-}
-
 .main-about {
     display: grid;
     /* place-items: center; */
     align-content: center;
+    line-height: 2em;
 }
 
 .working-experience {
@@ -186,6 +180,8 @@ body {
 .author-info {
     margin-top:1.8em;
     color: gray;
+    display: flex;
+    align-items: center;
 }
 
 .author-social {
@@ -193,10 +189,22 @@ body {
 }
 
 .author-img {
-    width: 50px;
-    padding: 1px;
+    width: 48px;
+    position: absolute;
     border-radius: 50%;
-    border: 2px #18a2b8 solid;
+    border: 1px solid white;
+    top: 2px;
+    left: 2px;
+}
+
+.author-img-border {
+    display: inline-block;
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    margin-right: 1em;
+    background: linear-gradient(25deg, #18a2b8, white 45% 55%, #18a2b8);
 }
 
 
@@ -217,5 +225,8 @@ body {
     }
     .jumbo p {
         line-height: 2em;
+    }
+    .sidebar {
+        margin-top: 1em;
     }
 }
